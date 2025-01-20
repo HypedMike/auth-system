@@ -28,7 +28,38 @@ export const refresh = async (refreshToken: string, options: Options): Promise<M
         };
     }
 
-    console.log("Session in refresh", session)
+    // check if refresh token is expired
+    const decoded = jwt.decode(refreshToken);
+
+    if (!decoded) {
+        return {
+            errors: ["Invalid refresh token"],
+            accessToken: "",
+            refreshToken: ""
+        };
+    }
+
+    // check if the refresh token is the last one of the array
+    if (session.refreshTokens[session.refreshTokens.length - 1] !== refreshToken) {
+        // delete session
+        const deleteRes = await options.client.db(options.dbName).collection<Session>(options.collectionName).deleteOne({
+            _id: session._id
+        });
+
+        if (deleteRes.deletedCount === 0) {
+            return {
+                errors: ["Invalid refresh token", "Couldn't delete session"],
+                accessToken: "",
+                refreshToken: ""
+            };
+        }
+
+        return {
+            errors: ["Invalid refresh token"],
+            accessToken: "",
+            refreshToken: ""
+        };
+    }
 
     // create response
     let response: MontResponse = {
@@ -58,11 +89,10 @@ export const refresh = async (refreshToken: string, options: Options): Promise<M
         _id: session._id
     }, {
         $push: {
-            accessTokens: newAccessToken
+            accessTokens: newAccessToken,
+            refreshTokens: newRefreshToken
         }
     });
-
-    console.log("Update res", updateRes)
 
     if (updateRes.modifiedCount === 0) {
         response.errors.push("Couldn't update session");
