@@ -1,0 +1,15 @@
+# MontAuth
+
+This is a simple JWT auth system made in TypeScript.
+It's as simple as it gets, but it's a good starting point for a more complex system.
+
+## How to use
+
+1. Clone the repository into your project
+2. Run `npm install`
+3. Create a `.env` file in the root of the project with the following content:
+```
+JWT_SECRET="your_secret_key"
+JWT_ACCESS_TOKEN_EXPIRES_IN=3600
+JWT_REFRESH_TOKEN_EXPIRES_IN=86400
+```
