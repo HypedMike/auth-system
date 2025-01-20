@@ -1,0 +1,1 @@
+export const JWT_REFRESH_TOKEN_EXPIRES_IN = "7d";
