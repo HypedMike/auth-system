@@ -13,3 +13,10 @@ JWT_SECRET="your_secret_key"
 JWT_ACCESS_TOKEN_EXPIRES_IN=3600
 JWT_REFRESH_TOKEN_EXPIRES_IN=86400
 ```
+
+## Functions
+
+- `montAuth.createSession(payload: object, options: Options): MontResponse` - Creates a new access and refresh token
+- `montAuth.validate(token: string, options: Options): MontResponse` - Checks if an access token is valid
+- `montAuth.refresh(token: string, options: Options): MontResponse` - Refreshes a refresh token
+- `montAuth.auto(token: string, options: Options): MontResponse` - Automatically validates or refreshes a token

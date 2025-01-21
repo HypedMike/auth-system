@@ -1,14 +1,17 @@
 {
   "name": "mont-auth",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "SDK to create an all function JWT auth system",
   "license": "ISC",
   "author": "michele saladino",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsc && node dist/index.js"
+    "dev": "tsc && node dist/index.js",
+    "build": "tsup"
   },
   "dependencies": {
     "@types/dotenv": "^6.1.1",
@@ -19,7 +22,8 @@
     "typescript": "^5.7.3"
   },
   "devDependencies": {
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "tsup": "^8.3.5"
   },
   "files": [
     "dist",
