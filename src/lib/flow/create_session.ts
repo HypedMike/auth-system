@@ -27,7 +27,7 @@ export const createSession = async (userId: string | number | ObjectId, options:
 
     // create a new session
     let session: Session = new Session({
-        id: new ObjectId(),
+        _id: new ObjectId(),
         userId: userId,
         accessTokens: [accessToken],
         refreshTokens: [refreshToken],
