@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 
 class Session {
-    id: ObjectId;
+    _id: ObjectId;
     userId: ObjectId | string | number;
     accessTokens: string[];
     refreshTokens: string[];
@@ -9,21 +9,21 @@ class Session {
     updatedAt: number;
 
     constructor({
-        id = new ObjectId(),
+        _id = new ObjectId(),
         userId = "",
         accessTokens = [],
         refreshTokens = [],
         createdAt = 0,
         updatedAt = 0
     }: {
-        id?: ObjectId,
+        _id?: ObjectId,
         userId?: ObjectId | string | number,
         accessTokens?: string[],
         refreshTokens?: string[],
         createdAt?: number,
         updatedAt?: number
     }) {
-        this.id = id;
+        this._id = _id;
         this.userId = userId;
         this.accessTokens = accessTokens;
         this.refreshTokens = refreshTokens;
@@ -33,7 +33,7 @@ class Session {
 
     static fromJson(json: any): Session {
         return new Session({
-            id: json.id,
+            _id: json._id,
             userId: json.userId,
             accessTokens: json.accessTokens,
             refreshTokens: json.refreshTokens,
@@ -44,7 +44,7 @@ class Session {
 
     toJson() {
         return {
-            id: this.id,
+            _id: this._id,
             userId: this.userId,
             accessTokens: this.accessTokens,
             refreshTokens: this.refreshTokens,
