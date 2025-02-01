@@ -1,6 +1,6 @@
 {
   "name": "mont-auth",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "SDK to create an all function JWT auth system",
   "license": "ISC",
   "author": "michele saladino",
