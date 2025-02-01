@@ -75,11 +75,11 @@ export const refresh = async (refreshToken: string, options: Options): Promise<M
     }
 
     // generate a new refresh token
-    const newRefreshToken = generateRefreshToken(session.id.toHexString(), process.env.JWT_SECRET ?? "");
+    const newRefreshToken = generateRefreshToken(session._id.toHexString(), process.env.JWT_SECRET ?? "");
 
     // generate a new access token
     const newAccessToken = jwt.sign({
-        sessionId: session.id.toHexString()
+        sessionId: session._id.toHexString()
     }, process.env.JWT_SECRET ?? "", {
         expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRES_IN
     });
@@ -102,6 +102,7 @@ export const refresh = async (refreshToken: string, options: Options): Promise<M
     // return the response
     response.accessToken = newAccessToken;
     response.refreshToken = newRefreshToken;
+    response.decoded = jwt.decode(newAccessToken);
 
     return response;
 }
