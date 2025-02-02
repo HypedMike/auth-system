@@ -103,7 +103,9 @@ export const refresh = async (refreshToken: string, options: Options): Promise<M
     // return the response
     response.accessToken = newAccessToken;
     response.refreshToken = newRefreshToken;
-    response.decoded = jwt.decode(newAccessToken);
+    response.decoded = {
+        userId: session.userId.toString()
+    }
 
     return response;
 }
