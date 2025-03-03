@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { JWT_REFRESH_TOKEN_EXPIRES_IN } from "../../costants";
+import { JWT_ACCESS_TOKEN_EXPIRES_IN, JWT_REFRESH_TOKEN_EXPIRES_IN, JWT_SECRET } from "../../costants";
 import Session from "../models/session";
 import { MontResponse, Options } from "./main";
 import jwt from 'jsonwebtoken';
@@ -76,13 +76,13 @@ export const refresh = async (refreshToken: string, options: Options): Promise<M
     }
 
     // generate a new refresh token
-    const newRefreshToken = generateRefreshToken(session.userId.toString(), process.env.JWT_SECRET ?? "");
+    const newRefreshToken = generateRefreshToken(session.userId.toString(), JWT_SECRET ?? "");
 
     // generate a new access token
     const newAccessToken = jwt.sign({
         userId: session.userId.toString()
-    }, process.env.JWT_SECRET ?? "", {
-        expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRES_IN
+    }, JWT_SECRET ?? "", {
+        expiresIn: JWT_ACCESS_TOKEN_EXPIRES_IN
     });
 
     // update the session

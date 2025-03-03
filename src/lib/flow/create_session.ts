@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb";
 import { MontResponse, Options } from "./main";
 import jwt from 'jsonwebtoken';
 import Session from "../models/session";
+import { JWT_ACCESS_TOKEN_EXPIRES_IN, JWT_REFRESH_TOKEN_EXPIRES_IN, JWT_SECRET } from "../../costants";
 
 export const createSession = async (userId: string | number | ObjectId, options: Options): Promise<MontResponse> => {
     // create response
@@ -14,15 +15,15 @@ export const createSession = async (userId: string | number | ObjectId, options:
     // generate a new refresh token
     const refreshToken = jwt.sign({
         userId: userId.toString()
-    }, process.env.JWT_SECRET ?? "", {
-        expiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRES_IN
+    }, JWT_SECRET ?? "", {
+        expiresIn: JWT_REFRESH_TOKEN_EXPIRES_IN
     });
 
     // generate a new access token
     const accessToken = jwt.sign({
         userId: userId.toString()
-    }, process.env.JWT_SECRET ?? "", {
-        expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRES_IN
+    }, JWT_SECRET ?? "", {
+        expiresIn: JWT_ACCESS_TOKEN_EXPIRES_IN
     });
 
     // create a new session

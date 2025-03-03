@@ -1,6 +1,6 @@
 {
   "name": "mont-auth",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "SDK to create an all function JWT auth system",
   "license": "ISC",
   "author": "michele saladino",
@@ -29,5 +29,10 @@
     "dist",
     "node_modules",
     ".env"
+  ],
+  "keywords": [
+    "auth",
+    "jwt",
+    "mongodb"
   ]
 }
