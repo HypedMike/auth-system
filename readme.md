@@ -20,3 +20,6 @@ JWT_REFRESH_TOKEN_EXPIRES_IN=86400
 - `montAuth.validate(token: string, options: Options): MontResponse` - Checks if an access token is valid
 - `montAuth.refresh(token: string, options: Options): MontResponse` - Refreshes a refresh token
 - `montAuth.auto(token: string, options: Options): MontResponse` - Automatically validates or refreshes a token
+
+## Troubleshooting
+In some environments you may need to use the function `setCostants` to set the env variables. You can do this by calling `montAuth.setConstants({ ... })`.
